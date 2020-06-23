@@ -39,7 +39,7 @@ class EntidadeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all()); -- pega todos os dados que eu  to mandando prometo post
+        dd($request->all()); //-- pega todos os dados que eu  to mandando prometo post
         $request->validate([
             'nome'=>'required',
             'cnpj'=>'required'

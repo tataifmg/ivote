@@ -48,6 +48,18 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="col-md-3">
+                        <label for="comment">Cep :</label>
+                        <br>
+                        <select name="cep" class="form-control">
+                            <!-- Pega os dados da tabela cidade como c-->
+                            @foreach ($cidades as $c)
+                                <!-- O valor dos dados da opção é o id de cidades e a opções são os nomes q tao em c -->
+                                <option value="{{ $c->id }}"> {{$c->cep}} </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <hr />
                 <div id="actions" class="row">

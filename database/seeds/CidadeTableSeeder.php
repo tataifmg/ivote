@@ -5593,7 +5593,7 @@ class CidadeTableSeeder extends Seeder
 		    Cidade::create([
 		        'nome' => $d[1],
 				'estado_id' => $d[0],
-				'codigo_ibge' => $d[6],
+				'cep' => $d[6],
 		    ]);
 		}
     }
