@@ -39,23 +39,25 @@ class EntidadeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all()); //-- pega todos os dados que eu  to mandando prometo post
+        //dd($request->all()); //-- pega todos os dados que eu  to mandando prometo post
         $request->validate([
             'nome'=>'required',
             'cnpj'=>'required'
         ]);
-
-        $entidade = new Entidade([
-            'nome' => $request->get('nome'),
-            'cnpj' => $request->get('cnpj'),
-            'endereco' => $request->get('endereco'),
-            'numero' => $request->get('numero'),
-            'bairro' => $request->get('bairro'),
-            'cidade' => $request->get('cidade'),
-            'cidade' => $request->get('cep')
-        ]); 
-        $entidade->save();
-        return redirect('/home-d')->with('success','Entidade Salva !');
+        try{
+            $entidade = new Entidade ([
+                'nome' => $request->get('nome'),
+                'cnpj' => $request->get('cnpj'),
+                'endereco' => $request->get('endereco'),
+                'numero' => $request->get('numero'),
+                'bairro' => $request->get('bairro'),
+                'cidade_id' => $request->get('cidade')
+            ]); 
+            $entidade->save();
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+        return redirect('/inserir-entidade')->with('success','Entidade Salva !');
     }
 
     /**

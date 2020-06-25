@@ -12,7 +12,6 @@ class Entidade extends Model
         'endereco',
         'numero',
         'bairro',
-        'cidade',
-        'cep'     
+        'cidade_id'  
     ];
 }

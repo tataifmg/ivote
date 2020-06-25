@@ -29,7 +29,17 @@
             </form>
         </nav>
         <div class="container-fluid" style="margin-top:80px">
-            @yield('main')
+          @if(session()->has('danger'))
+            <div class="alert alert-danger">
+                {{ session()->get('danger') }}
+            </div>
+          @endif
+          @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+          @endif
+          @yield('main')
         </div>
         
         <script src="{{ asset('js/app.js') }}" type="text/js"></script>

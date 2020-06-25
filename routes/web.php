@@ -20,9 +20,14 @@ use Illuminate\Support\Facades\Route;
 
 //------------------------------------------------- Telas em Comum ------------------------------------------------------
 
-Route::get('/cad-u', function () {
+/*Route::get('/cad-u', function () {
     return view('cadastrousuario');
-})->name('cad-u');
+})->name('cad-u');*/
+
+//coloca a nomeção do barra e manda para o controle q retorna a função index
+Route::get('/cad-u', [UserController::class, 'index'])->name('inserir-u');
+// pega os dados do cadatro e manda para o controle  q retorna a função store
+Route::post('/cad-u', [UserController::class, 'store'])->name('cad-u');
 
 Route::get('/', function () {
     return view('home');
