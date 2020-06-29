@@ -18,7 +18,6 @@ class CreateCidadesTable extends Migration
             $table->timestamps();
             $table->foreignId('estado_id')->constrained();
             $table->string('nome');
-            $table->string('cep');
         });
     }
 

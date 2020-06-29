@@ -58,7 +58,7 @@
                     <a href="{{ route('home-d') }}" class="btn btn-default">Cancelar</a>
                   </div>
                 </div>
-              </form>
+            </form>
         </div>
     </div>
 @endsection

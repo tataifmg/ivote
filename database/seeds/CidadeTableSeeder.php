@@ -5592,8 +5592,7 @@ class CidadeTableSeeder extends Seeder
 		foreach ($dados as $d) {
 		    Cidade::create([
 		        'nome' => $d[1],
-				'estado_id' => $d[0],
-				'cep' => $d[6],
+				'estado_id' => $d[0] 
 		    ]);
 		}
     }

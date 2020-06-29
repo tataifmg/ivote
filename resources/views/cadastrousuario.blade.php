@@ -12,6 +12,16 @@
             <a class="navbar-brand " href="{{ route('home-d') }}">iVote</a>
         </nav>
         <div class="container-fluid " style="margin-top:80px">
+            @if(session()->has('danger'))
+                <div class="alert alert-danger">
+                    {{ session()->get('danger') }}
+                </div>
+            @endif
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row">
@@ -20,52 +30,54 @@
                         </div>
                     </div>
                     <hr />
-                    <form action="{{ route('standby-d') }}">
+                    <form action="{{route('cad-u')}}" method="POST">
                         <div class="row">
                             <div class="form-group col-md-9">
                               <label for="nome" >Nome :</label>
-                              <input type="text" class="form-control" id="nome">
+                              <input type="text" class="form-control" id="nome" name="nome" value="{{old('nome')}}">
                             </div>
                             
                             <div class="form-group col-md-3">
                                 <label for="cpf">CPF :</label>
-                                <input type="text" class="form-control" id="cpf">
+                                <input type="text" class="form-control" id="cpf" name="cpf" value="{{old('cpf')}}">
                               </div> 
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                              <label for="nome" >Email :</label>
-                              <input type="text" class="form-control" id="nome">
+                              <label for="email" >Email :</label>
+                              <input type="text" class="form-control" id="email" name="email" value="{{old('email')}}">
                             </div>
                             
                             <div class="form-group col-md-6">
-                                <label for="cpf">Confirmar Email :</label>
-                                <input type="text" class="form-control" id="cpf">
+                                <label for="confirmar_email">Confirmar Email :</label>
+                                <input type="text" class="form-control" id="confirmar_email" name="confirmar_email" value="{{old('confirmar_email')}}">
                               </div> 
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                              <label for="nome" >Senha :</label>
-                              <input type="text" class="form-control" id="nome">
+                              <label for="senha" >Senha :</label>
+                              <input type="text" class="form-control" id="senha" name="senha" value="{{old('senha')}}">
                             </div>
                             
                             <div class="form-group col-md-6">
-                                <label for="cpf">Confirmar Senha :</label>
-                                <input type="text" class="form-control" id="cpf">
-                              </div> 
+                                <label for="confirmar_senha">Confirmar Senha :</label>
+                                <input type="text" class="form-control" id="confirmar_senha" name="confirmar_senha" value="{{old('confirmar_senha')}}">
+                            </div> 
                         </div>
 
                         <div class="row">
-                        
                             <div class="col-md-4">
                                 <label for="comment">Estado :</label>
                                 <br>
                                 <select name="estado" class="form-control">
-                                    <option><a class="dropdown-item" href="#">Link 1</a></option>
-                                    <option><a class="dropdown-item" href="#">Link 1</a></option>
-                                    <option><a class="dropdown-item" href="#">Link 1</a></option>
+                                    <option value="">...</option>
+                                    {{--  Pega os dados da tabela cidade como c--}}
+                                    @foreach ($estados as $e)
+                                        {{--O valor dos dados da opção é o id de cidades e a opções são os nomes q tao em c --}}
+                                        <option value="{{ $e->id }}" {{old('estado')==$e->id?'selected':''}}> {{$e->nome}} </option>
+                                    @endforeach
                                 </select>
                             </div>
         
@@ -73,16 +85,20 @@
                                 <label for="comment">Cidade :</label>
                                 <br>
                                 <select name="cidade" class="form-control">
-                                    <option><a class="dropdown-item" href="#">Link 1</a></option>
-                                    <option><a class="dropdown-item" href="#">Link 1</a></option>
-                                    <option><a class="dropdown-item" href="#">Link 1</a></option>
+                                    <option value="">...</option>
+                                    {{--  Pega os dados da tabela cidade como c--}}
+                                    @foreach ($cidades as $c)
+                                        {{--O valor dos dados da opção é o id de cidades e a opções são os nomes q tao em c --}}
+                                        <option value="{{ $c->id }}" {{old('cidade')==$c->id?'selected':''}}> {{$c->nome}} </option>
+                                    @endforeach
                                 </select>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="comment">Tipo de Usuario :</label>
                                 <br>
                                 <select name="tipo_usuario" class="form-control">
+                                    <option value="">...</option>
                                     <option><a class="dropdown-item" href="#" value="1">Decisor</a></option>
                                     <option><a class="dropdown-item" href="#" value="2">Comunidade</a></option>
                                 </select>
@@ -92,14 +108,13 @@
                         <div id="actions" class="row">
                           <div class="col-md-12">
                             <button type="submit" class="btn btn-primary">Salvar</button>
-                            <a href="{{ route('home-d') }}" class="btn btn-default">Cancelar</a>
+                            <a href="{{ route('home') }}" class="btn btn-default">Cancelar</a>
                           </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        
         <script src="{{ asset('js/app.js') }}" type="text/js"></script>
         <script src="plugins/jquery/jquery.min.js" type="text/js"></script>
         <script src="plugins/popper/popper.min.js" type="text/js"></script>
