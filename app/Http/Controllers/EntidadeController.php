@@ -17,6 +17,7 @@ class EntidadeController extends Controller
     {
         // os dados é um arry que contem todos os dados de cidades puchados do banco
         $dados['cidades']= Cidade::all();
+        
         //retorna a view do cadasto da entidade com os dados da tabela cidade 
         return view('decisor.cadastroentidade', $dados);
     }

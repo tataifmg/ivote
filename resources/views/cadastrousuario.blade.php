@@ -22,6 +22,7 @@
                     {{ session()->get('success') }}
                 </div>
             @endif
+            @csrf
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row">
@@ -31,6 +32,7 @@
                     </div>
                     <hr />
                     <form action="{{route('cad-u')}}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="form-group col-md-9">
                               <label for="nome" >Nome :</label>
@@ -68,19 +70,6 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <label for="comment">Estado :</label>
-                                <br>
-                                <select name="estado" class="form-control">
-                                    <option value="">...</option>
-                                    {{--  Pega os dados da tabela cidade como c--}}
-                                    @foreach ($estados as $e)
-                                        {{--O valor dos dados da opção é o id de cidades e a opções são os nomes q tao em c --}}
-                                        <option value="{{ $e->id }}" {{old('estado')==$e->id?'selected':''}}> {{$e->nome}} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-        
                             <div class="col-md-4">
                                 <label for="comment">Cidade :</label>
                                 <br>

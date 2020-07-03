@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Entidade;
+use App\Proposta;
 use Illuminate\Http\Request;
 
 class PropostaController extends Controller
@@ -13,7 +15,10 @@ class PropostaController extends Controller
      */
     public function index()
     {
-        //
+         // os dados é um arry que contem todos os dados de cidades puchados do banco
+        $dados['entidades']= Entidade::all();
+         //retorna a view do cadasto da entidade com os dados da tabela cidade 
+        return view('decisor.cadastroproposta',$dados);
     }
 
     /**
@@ -56,7 +61,8 @@ class PropostaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $proposta = Proposta::find($id);
+        return view('decisor.editarproposta', compact('proposta'));
     }
 
     /**

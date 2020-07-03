@@ -9,27 +9,37 @@
                 </div>
             </div>
             <hr />
-            <form action="{{ route('standby-d') }}">
+            <form action="{{ route('cadastro-p') }}" method="POST">
+              @csrf
                 <div class="row">
                     <div class="form-group col-md-4">
                       <label for="nome">Nome :</label>
-                      <input type="text" class="form-control" id="nome">
+                      <input type="text" class="form-control" id="nome" name="nome" value="{{old('nome')}}">
                     </div>
                     
                     <div class="form-group col-md-4">
                       <label for="data-in-com">Data de início da votação da comunidade :</label>
-                      <input type="text" class="form-control" id="data-in-com">
+                      <input type="text" class="form-control" id="data-in-com" name="data-in-com" value="{{old('data-in-com')}}">
                     </div>
                     
+
                     <div class="form-group col-md-4">
                       <label for="data-fim-com">Data do fim da votação da comunidade :</label>
                       <input type="text" class="form-control" id="data-fim-com">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="entidade-rel">Entidade Relacionada :</label>
-                        <input type="text" class="form-control" id="entidade-rel">
+                    <div class="col-md-4">
+                      <label for="comment">Entidade Relacionada :</label>
+                      <br>
+                      <select name="cidade" class="form-control">
+                          <option value="">...</option>
+                          {{--  Pega os dados da tabela cidade como c--}}
+                          @foreach ($entidades as $e)
+                              {{--O valor dos dados da opção é o id de cidades e a opções são os nomes q tao em c --}}
+                              <option value="{{ $e->id }}" {{old('entidade')==$e->id?'selected':''}}> {{$e->nome}} </option>
+                          @endforeach
+                      </select>
                     </div>
                     
                     <div class="form-group col-md-4">

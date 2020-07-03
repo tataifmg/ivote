@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\EntidadeController;
+use App\Http\Controllers\PropostaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +32,13 @@ Route::get('/cad-u', [UserController::class, 'index'])->name('inserir-u');
 // pega os dados do cadatro e manda para o controle  q retorna a função store
 Route::post('/cad-u', [UserController::class, 'store'])->name('cad-u');
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('home');
-})->name('home');
+})->name('home');*/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 //------------------------------------------------- Decisor ------------------------------------------------------
 
@@ -60,9 +66,14 @@ Route::get('/perfil-adm', function () {
     return view('decisor.perfildecisor');
 })->name('perfil-d');
 
-Route::get('/nova-proposta', function () {
+//coloca a nomeção do barra e manda para o controle q retorna a função index
+Route::get('/nova-proposta', [PropostaController::class, 'index'])->name('inserir-p');
+// pega os dados do cadatro e manda para o controle  q retorna a função store
+Route::post('/nova-proposta', [PropostaController::class, 'store'])->name('cadastro-p');
+
+/*Route::get('/nova-proposta', function () {
     return view('decisor.cadastroproposta');
-})->name('cadastro-p');
+})->name('cadastro-p'); */
 
 Route::get('/editar-proposta', function () {
     return view('decisor.editarproposta');
@@ -102,3 +113,5 @@ Route::get('/favoritas-c', function () {
 Route::get('/perfil-com', function () {
     return view('comunidade.perfilcomunidade');
 })->name('perfil-c');
+
+

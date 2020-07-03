@@ -6,6 +6,7 @@
         <title>iVote</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
         <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        
     </head>
     <body >
         <nav class="navbar navbar-expand-sm bg-success navbar-light fixed-top " >
