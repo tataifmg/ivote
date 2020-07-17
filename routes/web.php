@@ -42,9 +42,13 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 //------------------------------------------------- Decisor ------------------------------------------------------
 
-Route::get('/home-d', function () {
+/*Route::get('/home-d', function () {
     return view('decisor.homedecisor');
-})->name('home-d');
+})->name('home-d');*/
+
+Route::get('/home-d', [PropostaController::class, 'view'])->name('home-d');
+//Route::post('/home-d', [PropostaController::class, 'edit'])->name('edit-p');
+//Route::post('/home-d', [PropostaController::class, 'destroy'])->name('destroy-p');
 
 Route::get('/stand-by', function () {
     return view('decisor.standbydecisor');

@@ -8,6 +8,7 @@
                     <h2 class="">Nova Proposta</h2> 
                 </div>
             </div>
+            
             <hr />
             <form action="{{ route('cadastro-p') }}" method="POST">
               @csrf
@@ -19,20 +20,20 @@
                     
                     <div class="form-group col-md-4">
                       <label for="data-in-com">Data de início da votação da comunidade :</label>
-                      <input type="text" class="form-control" id="data-in-com" name="data-in-com" value="{{old('data-in-com')}}">
+                      <input type="date" class="form-control" id="data-in-com" name="data-in-com" value="{{old('data-in-com')}}">
                     </div>
                     
 
                     <div class="form-group col-md-4">
                       <label for="data-fim-com">Data do fim da votação da comunidade :</label>
-                      <input type="text" class="form-control" id="data-fim-com">
+                      <input type="date" class="form-control" id="data-fim-com" name="data-fim-com" value="{{old('data-fim-com')}}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                       <label for="comment">Entidade Relacionada :</label>
                       <br>
-                      <select name="cidade" class="form-control">
+                      <select name="entidade" class="form-control">
                           <option value="">...</option>
                           {{--  Pega os dados da tabela cidade como c--}}
                           @foreach ($entidades as $e)
@@ -44,28 +45,32 @@
                     
                     <div class="form-group col-md-4">
                       <label for="data-in-adm">Data de início da votação do decisor :</label>
-                      <input type="text" class="form-control" id="data-in-adm">
+                      <input type="date" class="form-control" id="data-in-adm" name="data-in-adm" value="{{old('data-in-adm')}}">
                     </div>
                     
                     <div class="form-group col-md-4">
                       <label for="data-fim-adm">Data do fim da votação do decisor :</label>
-                      <input type="text" class="form-control" id="data-fim-com">
+                      <input type="date" class="form-control" id="data-fim-com" name="data-fim-adm" value="{{old('data-fim-adm')}}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="comment">Descrição :</label>
-                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                        <label for="descricao">Descrição :</label>
+                        <textarea class="form-control" rows="5" id="descricao" name="descricao" value="{{old('descricao')}}" ></textarea>
                     </div>
-                    <div class="col-md-2">
-                        <label for="comment">Status :</label>
+                    <div class="col-md-4">
+                        <label for="status">Status :</label>
                         <br>
-                        <select name="status" class="form-control  ">
+                        <select id="status" class="form-control" name="status" value="{{old('status')}}">
                           <option><a class="dropdown-item" href="#" value="1">Stand-by</a></option>
                           <option><a class="dropdown-item" href="#" value="2">Em processo</a></option>
                           <option><a class="dropdown-item" href="#" value="3">Finalizadas</a></option>
                           <option><a class="dropdown-item" href="#" value="4">Encerradas</a></option>
                         </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="chave-acesso">Chave de acesso :</label>
+                      <input type="text" class="form-control" id="chave-acesso" name="chave-acesso" value="{{old('chave-acesso')}}">
                     </div>
                     
                 </div>

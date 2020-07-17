@@ -33,6 +33,7 @@
                     <hr />
                     <form action="{{route('cad-u')}}" method="POST">
                         @csrf
+                        
                         <div class="row">
                             <div class="form-group col-md-9">
                               <label for="nome" >Nome :</label>

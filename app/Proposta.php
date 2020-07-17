@@ -14,5 +14,9 @@ class Proposta extends Model
         'data_inicio_votacao_decisor',
         'data_fim_votacao_decisor',
         'status',
+        'votantes',
+        'chave_de_acesso',
+        'entidade_id',
+        'acompanhamento_id',
     ];
 }

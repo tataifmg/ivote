@@ -27,7 +27,17 @@
                         <td>Status</td>
                         <td colspan = 4>Ações</td>
                     </tr>
-                </thead>  
+                </thead>
+                <tbody>
+                    @foreach($propostas as $proposta)
+                    <tr>
+                        <td>{{$proposta->id}}</td>
+                        <td>{{$proposta->nome}}</td>
+                        <td>{{$proposta->status}}</td>
+                        
+                    </tr>
+                    @endforeach
+                </tbody> 
             </table> 
             
             <nav aria-label="Navegação de página exemplo">

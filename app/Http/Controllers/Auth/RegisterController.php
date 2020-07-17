@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Cidade;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -40,6 +41,12 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    public function index()
+    {
+         $dados['cidades']= Cidade::all();
+
+         return view('register', $dados);
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -51,6 +58,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'cpf'=>['required','string', 'max:11', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -65,7 +73,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'nome' => $data['nome'],
+            'cpf'=>$data['cpf'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

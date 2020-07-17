@@ -49,6 +49,7 @@
                                 <option value="{{ $c->id }}" {{old('cidade')==$c->id?'selected':''}}> {{$c->nome}} </option>
                             @endforeach
                         </select>
+                        
                     </div>
                 </div>
                 <hr />
