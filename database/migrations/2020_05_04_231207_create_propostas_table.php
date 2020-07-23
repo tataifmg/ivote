@@ -22,10 +22,9 @@ class CreatePropostasTable extends Migration
             $table->dateTime('data_inicio_votacao_decisor', 0);	
             $table->dateTime('data_fim_votacao_decisor', 0);
             $table->string('status');	
-            $table->text('votantes');
             $table->string('chave_de_acesso');	
             $table->foreignId('entidade_id')->constrained();
-            $table->foreignId('acompanhamento_id')->constrained();
+            $table->foreignId('acompanhamento_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

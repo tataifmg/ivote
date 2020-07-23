@@ -47,8 +47,6 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 })->name('home-d');*/
 
 Route::get('/home-d', [PropostaController::class, 'view'])->name('home-d');
-//Route::post('/home-d', [PropostaController::class, 'edit'])->name('edit-p');
-//Route::post('/home-d', [PropostaController::class, 'destroy'])->name('destroy-p');
 
 Route::get('/stand-by', function () {
     return view('decisor.standbydecisor');
@@ -75,17 +73,26 @@ Route::get('/nova-proposta', [PropostaController::class, 'index'])->name('inseri
 // pega os dados do cadatro e manda para o controle  q retorna a função store
 Route::post('/nova-proposta', [PropostaController::class, 'store'])->name('cadastro-p');
 
+//entender o pq eu n consigo encaminhar o id corretamente 
+Route::get('/editar-proposta/{id}', [PropostaController::class, 'edit'])->name('edit-p');
+
+Route::post('/update-proposta/{id}', [PropostaController::class, 'update'])->name('update-p');
+
+Route::get('/excluir-proposta/{id}', [PropostaController::class, 'destroy'])->name('destroy-p');
+
+Route::get('/visualizar-proposta/{id}', [PropostaController::class, 'show'])->name('visualizar-p');
+
 /*Route::get('/nova-proposta', function () {
     return view('decisor.cadastroproposta');
 })->name('cadastro-p'); */
 
-Route::get('/editar-proposta', function () {
+/*Route::get('/editar-proposta', function () {
     return view('decisor.editarproposta');
-})->name('editar-p');
+})->name('editar-p');*/
 
-Route::get('/visualizar-proposta', function () {
+/*Route::get('/visualizar-proposta', function () {
     return view('decisor.visualizarproposta');
-})->name('visualizar-p');
+})->name('visualizar-p');*/
 
 //coloca a nomeção do barra e manda para o controle q retorna a função index
 Route::get('/inserir-entidade', [EntidadeController::class, 'index'])->name('inserir-e');

@@ -60,10 +60,9 @@ class PropostaController extends Controller
                 'data_inicio_votacao_decisor' => $request->get('data-in-adm'),
                 'data_fim_votacao_decisor' => $request->get('data-fim-adm'),
                 'status' => $request->get('status'),
-                'votantes' => ('0'),
                 'chave_de_acesso' => $request->get('chave-acesso'),
                 'entidade_id' => $request->get('entidade'),
-                'acompanhamento_id' => (1),
+                'acompanhamento_id' => (null),
             ]); 
             $proposta->save();
         }catch(\Exception $e){
@@ -78,9 +77,15 @@ class PropostaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        try{
+            $dados['entidades']= Entidade::all();
+            $dados['proposta'] = Proposta::findOrFail($id);
+            return view('decisor.visualizarproposta', $dados);
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
     }
 
     /**
@@ -89,10 +94,16 @@ class PropostaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        $proposta = Proposta::find($id);
-        return view('decisor.editarproposta', compact('proposta'));
+        //dd($request->all()); debug 
+        try{
+            $dados['entidades']= Entidade::all();
+            $dados['proposta'] = Proposta::findOrFail($id);
+            return view('decisor.editarproposta', $dados);
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
     }
 
     /**
@@ -104,7 +115,30 @@ class PropostaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nome'=>'required',
+            'descricao'=>'required'
+        ]);
+        try{
+            $proposta = Proposta::find($id);
+            $proposta->nome = $request->get('nome');
+            $proposta->descricao = $request->get('descricao');
+            $proposta->data_inicio_votacao_comunidade = $request->get('data-in-com');
+            $proposta->data_fim_votacao_comunidade = $request->get('data-fim-com');
+            $proposta->data_inicio_votacao_decisor = $request->get('data-in-adm');
+            $proposta->data_fim_votacao_decisor = $request->get('data-fim-adm');
+            $proposta->status = $request->get('status');
+            $proposta->entidade_id= $request->get('entidade');
+            /* ver o que fazer com esses atributos 
+                'chave_de_acesso' => $request->get('chave-acesso'),
+                'votantes' => ('0'),
+                'acompanhamento_id' => (1),
+            */
+            $proposta->save();
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+        return redirect('/home-d')->with('success','Proposta Editada com sucesso !');
     }
 
     /**
@@ -115,6 +149,12 @@ class PropostaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $proposta = Proposta::findOrFail($id);
+            $proposta->delete();
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+        return redirect('/home-d')->with('success', 'Proposta deletada!');
     }
 }
