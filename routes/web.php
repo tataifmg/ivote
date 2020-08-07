@@ -3,6 +3,7 @@
 use App\Http\Controllers\EntidadeController;
 use App\Http\Controllers\PropostaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VotacaoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,106 +24,99 @@ use Illuminate\Support\Facades\Auth;
 
 //------------------------------------------------- Telas em Comum ------------------------------------------------------
 
-/*Route::get('/cad-u', function () {
-    return view('cadastrousuario');
-})->name('cad-u');*/
-
-//coloca a nomeção do barra e manda para o controle q retorna a função index
+//Necessita alteração de acordo com as funcionalidades do laravel de autenticação 
 Route::get('/cad-u', [UserController::class, 'index'])->name('inserir-u');
-// pega os dados do cadatro e manda para o controle  q retorna a função store
+// Necessita alteração de acordo com as funcionalidades do laravel de autenticação 
 Route::post('/cad-u', [UserController::class, 'store'])->name('cad-u');
 
-/*Route::get('/', function () {
-    return view('home');
-})->name('home');*/
+//Tela que mostra o resultado da pesquisa, tendo como base a pesquisa de nomes  
+Route::post('/pesquisa', [PropostaController::class, 'pesquisa'])->name('pesquisa');
+
+Route::get('/votar-proposta/{id}', [VotacaoController::class, 'index'])->name('votar-p');
+
+Route::get('/votacao', [VotacaoController::class, 'store'])->name('votacao');
 
 Auth::routes();
 
+Route::post('/sair', function(){
+    Auth::logout();
+    return redirect()->route('login');
+})->name('sair');
+
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
+Route::get('/register', 'Auth\RegisterController@index')->name('register');
+
+Route::group( ['middleware' => ['auth','decisor']], function(){
 //------------------------------------------------- Decisor ------------------------------------------------------
 
-/*Route::get('/home-d', function () {
-    return view('decisor.homedecisor');
-})->name('home-d');*/
+    // Home decisor
+    Route::get('/home-d', [PropostaController::class, 'view'])->name('home-d');
 
-Route::get('/home-d', [PropostaController::class, 'view'])->name('home-d');
+    // Stand-by, em espera para a votação
+    Route::get('/stand-by', [PropostaController::class, 'standby'])->name('standby-d');
 
-Route::get('/stand-by', function () {
-    return view('decisor.standbydecisor');
-})->name('standby-d');
+    //Em Processo, a comunidade ta votando  
+    Route::get('/emprocesso', [PropostaController::class, 'emprocesso'])->name('emprocesso-d');
 
-Route::get('/emprocesso', function () {
-    return view('decisor..emprocessodecisor');
-})->name('emprocesso-d');
+    //Finalizadas, foram finalizadas a votação da comunidade
+    Route::get('/finalizadas-d', [PropostaController::class, 'finalizadas'])->name('finalizadas-d');
 
-Route::get('/finalizadas-d', function () {
-    return view('decisor.finalizadasdecisor');
-})->name('finalizadas-d');
+    //Encerrada, já foi entregue os resultados da votação do decisor
+    Route::get('/encerradas-d', [PropostaController::class, 'encerradas'])->name('encerradas-d');
 
-Route::get('/encerradas-d', function () {
-    return view('decisor.encerradasdecisor');
-})->name('encerradas-d');
+    // Perfil adm, necessario revisão com o roger  
+    Route::get('/perfil-adm', [UserController::class, 'show'])->name('perfil-d');
 
-Route::get('/perfil-adm', function () {
-    return view('decisor.perfildecisor');
-})->name('perfil-d');
+    //coloca a nomeção do barra e manda para o controle q retorna a função index
+    Route::get('/nova-proposta', [PropostaController::class, 'index'])->name('inserir-p');
 
-//coloca a nomeção do barra e manda para o controle q retorna a função index
-Route::get('/nova-proposta', [PropostaController::class, 'index'])->name('inserir-p');
-// pega os dados do cadatro e manda para o controle  q retorna a função store
-Route::post('/nova-proposta', [PropostaController::class, 'store'])->name('cadastro-p');
+    // pega os dados do cadatro e manda para o controle  q retorna a função store
+    Route::post('/nova-proposta', [PropostaController::class, 'store'])->name('cadastro-p');
 
-//entender o pq eu n consigo encaminhar o id corretamente 
-Route::get('/editar-proposta/{id}', [PropostaController::class, 'edit'])->name('edit-p');
+    //FUNCIONA CORETAMENTE
+    Route::get('/editar-proposta/{id}', [PropostaController::class, 'edit'])->name('edit-p');
 
-Route::post('/update-proposta/{id}', [PropostaController::class, 'update'])->name('update-p');
+    Route::post('/update-proposta/{id}', [PropostaController::class, 'update'])->name('update-p');
 
-Route::get('/excluir-proposta/{id}', [PropostaController::class, 'destroy'])->name('destroy-p');
+    //Deleta a proposta selecionada
+    Route::get('/excluir-proposta/{id}', [PropostaController::class, 'destroy'])->name('destroy-p');
 
-Route::get('/visualizar-proposta/{id}', [PropostaController::class, 'show'])->name('visualizar-p');
+    //Mostra os dados da proposta selecionada
+    Route::get('/visualizar-proposta/{id}', [PropostaController::class, 'show'])->name('visualizar-p');
 
-/*Route::get('/nova-proposta', function () {
-    return view('decisor.cadastroproposta');
-})->name('cadastro-p'); */
+    //coloca a nomeção do barra e manda para o controle q retorna a função index
+    Route::get('/inserir-entidade', [EntidadeController::class, 'index'])->name('inserir-e');
 
-/*Route::get('/editar-proposta', function () {
-    return view('decisor.editarproposta');
-})->name('editar-p');*/
+    // pega os dados do cadatro e manda para o controle  q retorna a função store
+    Route::post('/inserir-entidade', [EntidadeController::class, 'store'])->name('cadastro-e');
+});
 
-/*Route::get('/visualizar-proposta', function () {
-    return view('decisor.visualizarproposta');
-})->name('visualizar-p');*/
-
-//coloca a nomeção do barra e manda para o controle q retorna a função index
-Route::get('/inserir-entidade', [EntidadeController::class, 'index'])->name('inserir-e');
-// pega os dados do cadatro e manda para o controle  q retorna a função store
-Route::post('/inserir-entidade', [EntidadeController::class, 'store'])->name('cadastro-e');
-
-/*Route::get('/inserir-entidade', function () {
-    return view('decisor.cadastroentidade');
-})->name('inserir-e');*/
-
+Route::group( ['middleware' => ['auth', 'comunidade']], function(){
 //------------------------------------------------- COMUNIDADE ------------------------------------------------------
 
-Route::get('/home-c', function () {
-    return view('comunidade.homecomunidade');
-})->name('home-c');
+    //Home da comunidade ps: precisa mostrar apenas em processo, encerradas ou finalizadas
+    Route::get('/home-c', 'ComunidadeController@viewcomunidade')->name('home-c');
 
-Route::get('/finalizadas-c', function () {
-    return view(' comunidade.finalizadascomunidade');
-})->name('finalizadas-c');
+    //Tela que mostra o resultado da pesquisa, tendo como base a pesquisa de nomes  
+    Route::post('/pesquisa-com','ComunidadeController@pesquisacom')->name('pesquisa-com');
+    
+    //Finalizadas, foram finalizadas a votação da comunidade
+    Route::get('/finalizadas-c', 'ComunidadeController@finalizadascom')->name('finalizadas-c');
 
-Route::get('/encerradas-c', function () {
-    return view('comunidade.encerradascomunidade');
-})->name('encerradas-c');
+    //Encerrada, já foi entregue os resultados da votação do decisor
+    Route::get('/encerradas-c', 'ComunidadeController@encerradascom')->name('encerradas-c');
 
-Route::get('/favoritas-c', function () {
-    return view('comunidade.favoritascomunidade');
-})->name('favoritas-c');
+    Route::get('/favoritas-c', function () {
+        return view('comunidade.favoritascomunidade');
+    })->name('favoritas-c');
 
-Route::get('/perfil-com', function () {
-    return view('comunidade.perfilcomunidade');
-})->name('perfil-c');
+    Route::get('/perfil-com', function () {
+        return view('comunidade.perfilcomunidade');
+    })->name('perfil-c');
+});
+
+
+
 
 

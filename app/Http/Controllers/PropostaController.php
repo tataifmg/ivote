@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Entidade;
 use App\Proposta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PropostaController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -20,13 +22,68 @@ class PropostaController extends Controller
          //retorna a view do cadasto da entidade com os dados da tabela cidade 
         return view('decisor.cadastroproposta',$dados);
     }
-
+//-----------------------------------------Listagens das propostas ----------------------------------------
     public function view(){
+        //Manda uma lista de todas as propostas para o decisor 
         $propostas = Proposta::all();
-
         return view('decisor.homedecisor', compact('propostas'));
     }
+ 
+    public function standby(){
+        //Manda uma lista das propostas em Stand-by para o decisor 
+        try{
+            $propostas = Proposta::where('status','like','Stand-by')->get();   
+            return view('decisor.standbydecisor', compact('propostas'));
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        } 
+    }
 
+    public function emprocesso(){
+        //Manda uma lista das propostas Em Processo para o decisor 
+        try{
+            $propostas = Proposta::where('status','like','Em processo')->get();   
+            return view('decisor.emprocessodecisor', compact('propostas'));
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        } 
+    }
+
+    public function finalizadas(){
+        //Manda uma lista das propostas Finalizadas para o decisor 
+        try{
+            $propostas = Proposta::where('status','like','Finalizadas')->get();   
+            return view('decisor.finalizadasdecisor', compact('propostas'));
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        } 
+    }
+
+    public function encerradas(){
+        //Manda uma lista das propostas em Encerradas para o decisor 
+        try{
+            $propostas = Proposta::where('status','like','Encerradas')->get();   
+            return view('decisor.encerradasdecisor', compact('propostas'));
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        } 
+    }
+
+//----------------------------------------- Pesquisa pelo nome da proposta -------------------------------    
+    public function pesquisa(Request $request){
+        try{
+            $nome = $request->get('nome');
+            $propostas = Proposta::where('nome','like',$nome)->get();
+            return view('decisor.pesquisa', ['propostas' => $propostas]);
+
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        } 
+    }
+   
+//-----------------------------------------Criação da proposta ----------------------------------------
+
+ 
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +93,7 @@ class PropostaController extends Controller
     {
         //
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -71,6 +128,7 @@ class PropostaController extends Controller
         return redirect('/nova-proposta')->with('success','Proposta Salva !');
     }
 
+//-----------------------------------------Visualização da proposta ----------------------------------------
     /**
      * Display the specified resource.
      *
@@ -82,12 +140,13 @@ class PropostaController extends Controller
         try{
             $dados['entidades']= Entidade::all();
             $dados['proposta'] = Proposta::findOrFail($id);
+            
             return view('decisor.visualizarproposta', $dados);
         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         }
     }
-
+//-----------------------------------------Edição da proposta ----------------------------------------
     /**
      * Show the form for editing the specified resource.
      *
@@ -120,7 +179,7 @@ class PropostaController extends Controller
             'descricao'=>'required'
         ]);
         try{
-            $proposta = Proposta::find($id);
+            $proposta = Proposta::findOrFail($id);
             $proposta->nome = $request->get('nome');
             $proposta->descricao = $request->get('descricao');
             $proposta->data_inicio_votacao_comunidade = $request->get('data-in-com');
@@ -141,6 +200,7 @@ class PropostaController extends Controller
         return redirect('/home-d')->with('success','Proposta Editada com sucesso !');
     }
 
+//-----------------------------------------Delete da proposta ----------------------------------------
     /**
      * Remove the specified resource from storage.
      *

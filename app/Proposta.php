@@ -25,4 +25,5 @@ class Proposta extends Model
         'data_fim_votacao_decisor',
     ];
     
+    
 }

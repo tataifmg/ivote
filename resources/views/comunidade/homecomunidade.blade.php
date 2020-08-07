@@ -8,22 +8,38 @@
                     <h2 class="">Propostas</h2> 
                 </div>
                 <div class="col-sm-4">
-                    <form class="form-inline" action="/action_page.php">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar">
-                        <button class="btn btn-success" type="submit">Pesquisar</button>
+                    <form class="form-inline" action="{{route('pesquisa-com')}}" method="POST">
+                        @csrf 
+                        <input type="search" class="form-control" id="nome" name="nome" placeholder="Pesquisar">
+                        <button class="btn btn-success" type="submit">Pesquisar</button>    
                     </form> 
                 </div>
             </div>
-            <table class="table table-striped">
+            <table class="table table-striped">  
                 <thead>
                     <tr>
-                        <td>ID</td>
+                        <td>Id</td>
                         <td>Nome</td>
+                        <td>Descrição</td>
                         <td>Status</td>
-                        <td colspan = 4>Ações</td>
+                        <td colspan = 2 >Ações</td>
                     </tr>
-                </thead>  
-            </table> 
+                </thead>
+                <tbody>
+                    @foreach($propostas as $proposta)        
+                    <tr>
+                        <td>{{$proposta->id}}</td>
+                        <td>{{$proposta->nome}}</td>
+                        <td>{{$proposta->descricao}}</td>
+                        <td>{{$proposta->status}}</td>
+                        <td class="actions ">
+                            <a href="{{ '/votar-proposta/'.$proposta->id}}" class="btn btn-info">Votar</a>
+                            <a href="#" class="btn text-white" style="background-color: #D92344;">Favoritar</a>
+                        </td>                       
+                    </tr>
+                    @endforeach
+                </tbody> 
+            </table>
         </div>
     </div>
 @endsection

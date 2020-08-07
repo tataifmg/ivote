@@ -24,7 +24,7 @@ class CreatePropostasTable extends Migration
             $table->string('status');	
             $table->string('chave_de_acesso');	
             $table->foreignId('entidade_id')->constrained();
-            $table->foreignId('acompanhamento_id')->constrained()->nullable();
+            $table->foreignId('acompanhamento_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

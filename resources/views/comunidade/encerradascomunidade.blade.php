@@ -23,6 +23,19 @@
                         <td colspan = 4>Ações</td>
                     </tr>
                 </thead>  
+                <tbody>
+                    @foreach($propostas as $proposta)        
+                    <tr>
+                        <td>{{$proposta->id}}</td>
+                        <td>{{$proposta->nome}}</td>
+                        <td>{{$proposta->status}}</td>
+                        <td class="actions ">
+                            <!-- Dar funcionalidade a esse botão   !-->
+                            <a class="btn btn-primary " href="edit.html">Resultado final</a>
+                        </td>                       
+                    </tr>
+                    @endforeach
+                </tbody> 
             </table> 
         </div>
     </div>

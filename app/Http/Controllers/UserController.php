@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Cidade;
+use App\Entidade;
 
 class UserController extends Controller
 {
@@ -15,9 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-         $dados['cidades']= Cidade::all();
+        /* $dados['cidades']= Cidade::all();
 
-         return view('cadastrousuario', $dados);
+         return view('cadastrousuario', $dados);*/
     }
 
     /**
@@ -38,12 +39,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+       /* $request->validate([
             'cpf'=>'required',
             'email'=>'required',
             'password'=>'required'
-        ]);
-        try{
+         ]);
+         try{
             $user = new User([
                 'nome' => $request->get('nome'),
                 'cpf'=> $request->get('cpf'),
@@ -54,10 +55,11 @@ class UserController extends Controller
 
             ]);
             $user->save();
-        }catch(\Exception $e){
+         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
-        }
-        return redirect('/home-d')->with('success','Cadastro feito com sucesso !');
+         }
+         return redirect('/home-d')->with('success','Cadastro feito com sucesso !');
+        */
     }
 
     /**
@@ -66,9 +68,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+       /* try{
+            $dados['cidades']= Cidade::all();
+             //definir corretamente a entidade que esta sendo utilizado
+            $dados['entidades'] = Entidade::findOrFail(2);
+            //definir corretamente o perfil que esta sendo utilizado
+            $dados['user'] = User::findOrFail(1);
+            return view('decisor.perfildecisor', $dados);
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+        */
     }
 
     /**

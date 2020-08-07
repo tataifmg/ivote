@@ -5,7 +5,7 @@
   <div class="col-sm-12">
     <div class="row">
       <div class="col-sm-6">
-        <h2 class="">Editar Proposta</h2> 
+        <h2 class="">Vizualizar Proposta</h2> 
       </div>
     </div>
     <hr />

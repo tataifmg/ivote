@@ -31,6 +31,12 @@
             <form class="form-inline " action="{{ route('perfil-d') }}">
                 <button class="btn btn-light" type="submit">Perfil</button>
             </form>
+            <div style="position:absolute; right:10px;">
+              <form action="{{ route('sair') }}" method="POST">
+                @csrf
+                <button class="btn btn-light" type="submit">Sair</button>
+              </form>
+            </div>
         </nav>
         <div class="container-fluid" style="margin-top:80px">
           @if(session()->has('danger'))

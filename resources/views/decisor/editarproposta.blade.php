@@ -14,7 +14,7 @@
       <div class="row">   
         <div class="form-group col-md-4">  
           <label for="nome">Nome :</label>
-          <input type="text" class="form-control" id="nome" name="nome" value="{{ $proposta->nome }}" readonly>  
+          <input type="text" class="form-control" id="nome" name="nome" value="{{ $proposta->nome }}">  
         </div> 
 
         <div class="form-group col-md-4">      

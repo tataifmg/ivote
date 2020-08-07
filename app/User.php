@@ -20,6 +20,7 @@ class User extends Authenticatable
         'cpf',
         'email', 
         'password',
+        'cidade_id',
         'tipo_perfil',
     ];
 
@@ -40,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isDecisor(){
+        return $this->tipo_perfil == 'Decisor';
+    }
+    
+    public function isComunidade(){
+        return $this->tipo_perfil == 'Comunidade';
+    }
 }

@@ -8,13 +8,6 @@
                 <h2 class="">Propostas</h2> 
             </div>
             <div class="col-sm-4">
-                <form class="form-inline" action="{{route('pesquisa')}}" method="POST">
-                    @csrf 
-                    <input type="search" class="form-control" id="nome" name="nome"  placeholder="Pesquisar">
-                    <button class="btn btn-success" type="submit">Pesquisar</button>    
-                </form> 
-            </div>
-            <div class="col-sm-4">
                 <form class="form-inline float-right" action="{{ route('cadastro-p') }}">
                     <button class="btn btn-primary" type="submit">Nova Proposta</button>
                 </form> 
@@ -45,12 +38,18 @@
                 @endforeach
             </tbody> 
         </table> 
+        <hr />
+        <div id="actions" class="row">
+            <div class="col-md-12">
+            <a href="{{ route('home-d') }}" class="btn btn-primary">Voltar</a>
+            </div>
+        </div>   
     </div>
 </div>
 <script type="text/javascript"> 
     function confirma_exclusao(){
         if(window.confirm("Deseja deletar a proposta?")){
-            //window.location.href="{{-- {{$proposta?'/excluir-proposta/'.$proposta->id:'#'}} --}}";
+            window.location.href="{{ '/excluir-proposta/'.$proposta->id}}";
         }
     }
     

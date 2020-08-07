@@ -41,11 +41,11 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    
     public function index()
     {
-         $dados['cidades']= Cidade::all();
-
-         return view('register', $dados);
+        $dados['cidades']= Cidade::all();
+        return view('auth.register', $dados);
     }
 
     /**
@@ -56,11 +56,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        //dd($data);
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'cpf'=>['required','string', 'max:11', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cidade_id'=>['required'],
+            'tipo_perfil'=>['required'],
         ]);
     }
 
@@ -71,12 +74,15 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    { 
+        //dd($data);
         return User::create([
-            'nome' => $data['nome'],
+            'nome' => $data['name'],
             'cpf'=>$data['cpf'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'cidade_id'=>$data['cidade_id'],
+            'tipo_perfil'=>$data['tipo_perfil'],
         ]);
     }
 }

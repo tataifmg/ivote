@@ -69,7 +69,13 @@ class EntidadeController extends Controller
      */
     public function show($id)
     {
-        //
+        /*try{
+            $dados['cidades']= Cidade::all();
+            $dados['entidade'] = Entidade::findOrFail(2);
+            return view('decisor.perfildecisor', $dados);
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }*/
     }
 
     /**

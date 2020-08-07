@@ -17,6 +17,7 @@ class CidadeTableSeeder extends Seeder
     public function run()
     {
         $dados = [
+			/*
 			[21,'Alta Floresta D\'Oeste','02','Leste Rondoniense','006','Cacoal','1100015'],
 			[21,'Alto Alegre dos Parecis','02','Leste Rondoniense','006','Cacoal','1100379'],
 			[21,'Alto Paraíso','02','Leste Rondoniense','003','Ariquemes','1100403'],
@@ -2305,8 +2306,9 @@ class CidadeTableSeeder extends Seeder
 			[11,'Arapuá','05','Triângulo Mineiro/Alto Paranaíba','020','Patos de Minas','3103801'],
 			[11,'Araújos','06','Central Mineira','026','Bom Despacho','3103900'],
 			[11,'Araxá','05','Triângulo Mineiro/Alto Paranaíba','023','Araxá','3104007'],
-			[11,'Arceburgo','10','Sul/Sudoeste de Minas','048','São Sebastião do Paraíso','3104106'],
+			[11,'Arceburgo','10','Sul/Sudoeste de Minas','048','São Sebastião do Paraíso','3104106'],*/
 			[11,'Arcos','09','Oeste de Minas','044','Formiga','3104205'],
+			/*
 			[11,'Areado','10','Sul/Sudoeste de Minas','049','Alfenas','3104304'],
 			[11,'Argirita','12','Zona da Mata','066','Cataguases','3104403'],
 			[11,'Aricanduva','03','Jequitinhonha','011','Capelinha','3104452'],
@@ -5586,7 +5588,7 @@ class CidadeTableSeeder extends Seeder
 			[9,'Vicentinópolis','05','Sul Goiano','015','Meia Ponte','5222054'],
 			[9,'Vila Boa','04','Leste Goiano','012','Entorno de Brasília','5222203'],
 			[9,'Vila Propício','04','Leste Goiano','012','Entorno de Brasília','5222302'],
-			[7,'Brasília','01','Distrito Federal','001','Brasília','5300108']
+			[7,'Brasília','01','Distrito Federal','001','Brasília','5300108']*/
 		];
 
 		foreach ($dados as $d) {

@@ -16,7 +16,7 @@
           <label for="nome">Nome :</label>
           <input type="text" class="form-control" id="nome" name="nome" value="{{old('nome')}}">  
         </div> 
-
+        
         <div class="form-group col-md-4">      
           <label for="data-in-com">Data de início da votação da comunidade :</label>  
           <input type="date" class="form-control" id="data-in-com" name="data-in-com" value="{{old('data-in-com')}}">  
