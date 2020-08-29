@@ -28,10 +28,10 @@ class UserTableSeeder extends Seeder
 
         $u= new User();
         $u->id='2';
-        $u->nome='comunidade';
+        $u->nome='Comunidade';
         $u->email='comunidade@gmail.com';
         $u->cpf='41684724694';
-        $u->password='$2y$10$cCKV.HWAzVVpHerzlziwFugbQPlBbbXul4DspIngclZG/2LCgJIna';
+        $u->password='$2y$10$FOyYyFCOupA9FWp9VvUcKe7zYlbexP6fKb/H4q0dxFBzktNR99r.e';
         $u->cidade_id='1';
         $u->tipo_perfil='Comunidade';
         $u->created_at='2020-08-07 19:34:05';

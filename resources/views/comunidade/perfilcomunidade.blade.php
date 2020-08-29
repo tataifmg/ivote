@@ -9,33 +9,45 @@
             </div>      
             <hr /> 
         </div>      
-        <form class="container" action="/action_page.php">
+    <form class="container" action="{{ route('home-c')}}">
             <div class="row">    
                 <div class="form-group col-md-4">  
                     <label for="nome">Nome :</label>
-                    <input type="text" class="form-control" id="nome" name="nome"  readonly>  
+                    <input type="text" class="form-control" id="nome" name="nome" value="{{$user->nome}}" readonly>  
                 </div> 
                 <div class="form-group col-md-4">  
                     <label for="cpf">CPF :</label>
-                    <input type="text" class="form-control" id="cpf" name="cpf"  readonly>  
+                    <input type="text" class="form-control" id="cpf" name="cpf" value="{{$user->cpf}}" readonly>  
                 </div> 
                 <div class="form-group col-md-4">  
                     <label for="email">Email :</label>
-                    <input type="text" class="form-control" id="email" name="email"  readonly>  
+                    <input type="text" class="form-control" id="email" name="email" value="{{$user->email}}" readonly>  
                 </div> 
             </div> 
             <div class="row">    
-                <div class="form-group col-md-4">  
-                    <label for="cidade">Cidade :</label>
-                    <input type="text" class="form-control" id="cidade" name="cidade"  readonly>  
-                </div> 
+                <div class="col-md-4">
+                    <label for="comment">Cidade :</label>
+                    <br>
+                    <!-- Conferir com roger como atualizar usando um dropdown!-->
+                    <select name="cidade" class="form-control" readonly>
+                      <option value="">...</option>
+                      {{--  Pega os dados da tabela cidade como c--}}     
+                      @foreach ($cidades as $c)
+                        {{--O valor dos dados da opção é o id de cidades e a opções são os nomes q tao em c --}}
+                        <option value="{{ $c->id }}" {{old('cidade',$user->cidade_id)==$c->id?'selected':''}} readonly> 
+                          {{$c->nome}} </option>
+                      @endforeach
+                    </select>
+                </div>
                 <div class="form-group col-md-4">  
                     <label for="tipo_usuario">Tipo de perfil :</label>
-                    <input type="text" class="form-control" id="tipo_usuario" name="tipo_usuario"  readonly>  
+                    <input type="text" class="form-control" id="tipo_usuario" name="tipo_usuario" value="{{$user->tipo_perfil}}"  readonly>  
                 </div>  
             </div> 
             <hr>
-
+            <div>
+                <button type="submit" class="btn btn-primary" >Voltar</button>
+            </div>
         </form>
     </div>        
 </div>

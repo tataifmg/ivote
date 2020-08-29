@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cidade;
 use App\Proposta;
+use App\User;
 use Illuminate\Http\Request;
 
 class ComunidadeController extends Controller
@@ -47,5 +49,15 @@ class ComunidadeController extends Controller
         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         } 
+    }
+    public function usercom(){
+        try{
+            $id = auth()->user()->id;
+            $dados['cidades']= Cidade::all();
+            $dados['user'] = User::findOrFail($id);
+            return view('comunidade.perfilcomunidade', $dados);
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
     }
 }

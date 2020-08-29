@@ -50,7 +50,7 @@
 <script type="text/javascript"> 
     function confirma_exclusao(){
         if(window.confirm("Deseja deletar a proposta?")){
-            //window.location.href="{{-- {{$proposta?'/excluir-proposta/'.$proposta->id:'#'}} --}}";
+            window.location.href="{{ '/excluir-proposta/'.$proposta->id}}";
         }
     }
     

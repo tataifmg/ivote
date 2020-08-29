@@ -16,6 +16,7 @@ class CreateAcompanhamentosTable extends Migration
         Schema::create('acompanhamentos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('proposta_id')->constrained();
             $table->timestamps();
         });
     }

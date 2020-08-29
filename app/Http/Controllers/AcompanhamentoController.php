@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Acompanhamento;
+use App\Proposta;
 use Illuminate\Http\Request;
 
 class AcompanhamentoController extends Controller
@@ -13,7 +15,15 @@ class AcompanhamentoController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $user = auth()->user()->id;
+            $dados= Acompanhamento::where('user_id', 'like', $user)->get();
+            //$dados['propostas'] = Proposta::all();   
+            return view('comunidade.favoritascomunidade', compact('dados'));
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+        return redirect('/home-c');
     }
 
     /**
@@ -32,9 +42,19 @@ class AcompanhamentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        //dd($request->all());
+        try{
+            $proposta = Proposta::findOrFail($id);
+            $favoritar = new Acompanhamento();
+            $favoritar->proposta_id = $proposta->id;
+            $favoritar->user_id = auth()->user()->id;
+            $favoritar->save();
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+        return redirect('/home-c')->with('success','Proposta favoritada!');
     }
 
     /**

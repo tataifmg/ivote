@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Cidade;
 use App\Entidade;
 use App\Proposta;
+use App\User;
+use App\Votacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,7 +71,30 @@ class PropostaController extends Controller
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         } 
     }
+// Precisa de alteração 
+    /*public function votacao($id){
+        try{
+            $dados['entidades']= Entidade::all();
+            $dados['proposta'] = Proposta::findOrFail($id);
+            $sim = Votacao::where('resposta','like','sim')->count()->get();
+            $nao = Votacao::where('resposta','like','nao')->count()->get();
+            return view();
+            
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        } 
+    }*/
 
+    public function useradm(){
+        try{
+            $id = auth()->user()->id;
+            $dados['cidades']= Cidade::all();
+            $dados['user'] = User::findOrFail($id);
+            return view('decisor.perfildecisor', $dados);
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+    }
 //----------------------------------------- Pesquisa pelo nome da proposta -------------------------------    
     public function pesquisa(Request $request){
         try{

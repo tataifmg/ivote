@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entidade;
 use App\Proposta;
+use App\User;
 use App\Votacao;
 use Illuminate\Http\Request;
 
@@ -43,15 +44,31 @@ class VotacaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function concordo(Request $request, $id)
     {
+        //dd($request->all());
         try{
-            $votacao = new Votacao ([
-                //arrumar o user id
-                'user_id'=>(1),
-                'proposta_id' =>$request->get('proposta'),
-                'resposta'=>$request->get('resposta'),
-            ]); 
+            $proposta = Proposta::findOrFail($id);
+            $votacao = new Votacao;
+            $votacao->proposta_id = $proposta->id;
+            $votacao->user_id = auth()->user()->id;
+            $votacao->resposta ='sim';
+            $votacao->save();
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+        return redirect('/home-c')->with('success','Voto salvo !');
+    }
+
+    public function discorda(Request $request, $id)
+    {
+        //dd($request->all());
+        try{
+            $proposta = Proposta::findOrFail($id);
+            $votacao = new Votacao;
+            $votacao->proposta_id = $proposta->id;
+            $votacao->user_id = auth()->user()->id;
+            $votacao->resposta = $request->get('nao');
             $votacao->save();
         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();

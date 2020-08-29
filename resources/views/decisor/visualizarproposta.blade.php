@@ -9,7 +9,7 @@
       </div>
     </div>
     <hr />
-    <form method="post" action="{{ route('update-p', $proposta->id) }}">
+    <form method="post" action="{{ route('home-d') }}">
       @csrf
       <div class="row">   
         <div class="form-group col-md-4">  
@@ -78,7 +78,7 @@
       <hr />
       <div id="actions" class="row">
         <div class="col-md-12">
-          <a href="{{ route('home-d') }}" class="btn btn-primary">Voltar</a>
+          <button type="submit" class="btn btn-primary">Voltar</button>
         </div>
       </div>      
     </form>

@@ -16,7 +16,6 @@ class Proposta extends Model
         'status',
         'chave_de_acesso',
         'entidade_id',
-        'acompanhamento_id',
     ];
     protected $dates = [
         'data_inicio_votacao_comunidade',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcompanhamentoController;
 use App\Http\Controllers\EntidadeController;
 use App\Http\Controllers\PropostaController;
 use App\Http\Controllers\UserController;
@@ -24,17 +25,8 @@ use Illuminate\Support\Facades\Auth;
 
 //------------------------------------------------- Telas em Comum ------------------------------------------------------
 
-//Necessita alteração de acordo com as funcionalidades do laravel de autenticação 
-Route::get('/cad-u', [UserController::class, 'index'])->name('inserir-u');
-// Necessita alteração de acordo com as funcionalidades do laravel de autenticação 
-Route::post('/cad-u', [UserController::class, 'store'])->name('cad-u');
-
 //Tela que mostra o resultado da pesquisa, tendo como base a pesquisa de nomes  
 Route::post('/pesquisa', [PropostaController::class, 'pesquisa'])->name('pesquisa');
-
-Route::get('/votar-proposta/{id}', [VotacaoController::class, 'index'])->name('votar-p');
-
-Route::get('/votacao', [VotacaoController::class, 'store'])->name('votacao');
 
 Auth::routes();
 
@@ -90,6 +82,8 @@ Route::group( ['middleware' => ['auth','decisor']], function(){
 
     // pega os dados do cadatro e manda para o controle  q retorna a função store
     Route::post('/inserir-entidade', [EntidadeController::class, 'store'])->name('cadastro-e');
+
+    Route::get('/perfil-adm', 'PropostaController@useradm')->name('perfil-d');
 });
 
 Route::group( ['middleware' => ['auth', 'comunidade']], function(){
@@ -107,13 +101,17 @@ Route::group( ['middleware' => ['auth', 'comunidade']], function(){
     //Encerrada, já foi entregue os resultados da votação do decisor
     Route::get('/encerradas-c', 'ComunidadeController@encerradascom')->name('encerradas-c');
 
-    Route::get('/favoritas-c', function () {
-        return view('comunidade.favoritascomunidade');
-    })->name('favoritas-c');
+    Route::get('/teste/{id}', [VotacaoController::class, 'concordo'])->name('concordo');
 
-    Route::get('/perfil-com', function () {
-        return view('comunidade.perfilcomunidade');
-    })->name('perfil-c');
+    Route::get('/votacao/{id}', [VotacaoController::class, 'discorda'])->name('nao');
+
+    Route::get('/votar-proposta/{id}', [VotacaoController::class, 'index'])->name('votar-p');
+
+    Route::get('/perfil-com', 'ComunidadeController@usercom')->name('perfil-c');
+
+    Route::get('/favoritar/{id}', [AcompanhamentoController::class, 'store'])->name('favoritar');
+
+    Route::get('/favoritas-c', [AcompanhamentoController::class, 'index'])->name('favoritas-c');
 });
 
 
