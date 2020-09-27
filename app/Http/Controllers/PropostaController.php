@@ -45,6 +45,7 @@ class PropostaController extends Controller
     public function emprocesso(){
         //Manda uma lista das propostas Em Processo para o decisor 
         try{
+            $proposta = Proposta::whereBetween();
             $propostas = Proposta::where('status','like','Em processo')->get();   
             return view('decisor.emprocessodecisor', compact('propostas'));
         }catch(\Exception $e){
@@ -71,19 +72,6 @@ class PropostaController extends Controller
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         } 
     }
-// Precisa de alteração 
-    /*public function votacao($id){
-        try{
-            $dados['entidades']= Entidade::all();
-            $dados['proposta'] = Proposta::findOrFail($id);
-            $sim = Votacao::where('resposta','like','sim')->count()->get();
-            $nao = Votacao::where('resposta','like','nao')->count()->get();
-            return view();
-            
-        }catch(\Exception $e){
-            return redirect()->back()->with('danger',$e->getMessage())->withInput();
-        } 
-    }*/
 
     public function useradm(){
         try{

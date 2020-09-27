@@ -84,9 +84,16 @@ Route::group( ['middleware' => ['auth','decisor']], function(){
     Route::post('/inserir-entidade', [EntidadeController::class, 'store'])->name('cadastro-e');
 
     Route::get('/perfil-adm', 'PropostaController@useradm')->name('perfil-d');
+
+    Route::get('/a/{id}', [VotacaoController::class, 'a'])->name('a');
+
+    Route::get('/des/{id}', [VotacaoController::class, 'simd'])->name('simd');
+
+    Route::get('/den/{id}', [VotacaoController::class, 'naod'])->name('naod');
 });
 
 Route::group( ['middleware' => ['auth', 'comunidade']], function(){
+
 //------------------------------------------------- COMUNIDADE ------------------------------------------------------
 
     //Home da comunidade ps: precisa mostrar apenas em processo, encerradas ou finalizadas
@@ -106,6 +113,8 @@ Route::group( ['middleware' => ['auth', 'comunidade']], function(){
     Route::get('/votacao/{id}', [VotacaoController::class, 'discorda'])->name('nao');
 
     Route::get('/votar-proposta/{id}', [VotacaoController::class, 'index'])->name('votar-p');
+    
+    Route::get('/resultado-parcial/{id}','VotacaoController@resultadoparcial')->name('resultado-parcial');
 
     Route::get('/perfil-com', 'ComunidadeController@usercom')->name('perfil-c');
 

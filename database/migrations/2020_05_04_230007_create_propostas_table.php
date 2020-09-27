@@ -19,10 +19,9 @@ class CreatePropostasTable extends Migration
             $table->text('descricao');
             $table->dateTime('data_inicio_votacao_comunidade', 0);	
             $table->dateTime('data_fim_votacao_comunidade', 0);	
-            $table->dateTime('data_inicio_votacao_decisor', 0);	
-            $table->dateTime('data_fim_votacao_decisor', 0);
             $table->string('status');	
-            $table->string('chave_de_acesso');	
+            $table->string('resultado_proposta')->nullable();
+            $table->string('observacao_proposta')->nullable();
             $table->foreignId('entidade_id')->constrained();
             $table->timestamps();
         });

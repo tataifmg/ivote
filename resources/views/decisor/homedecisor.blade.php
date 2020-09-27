@@ -36,7 +36,7 @@
                     <td>{{$proposta->nome}}</td>
                     <td>{{$proposta->status}}</td>
                     <td class="actions ">
-                        <a class="btn btn-light " href="edit.html">Votar</a>
+                        <a href="{{ '/a/'.$proposta->id}}" class="btn btn-light">Registrar resultado</a>
                         <a class="btn btn-info " href="{{ '/visualizar-proposta/'.$proposta->id}}">Visualizar</a>
                         <a href="{{ '/editar-proposta/'.$proposta->id}}" class="btn btn-warning">Editar</a>
                         <a class="btn btn-danger "  href="#" onclick="confirma_exclusao();" >Excluir</a>

@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>iVote</title>
-      <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-      <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>iVote</title>
+        <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/Chart.min.css') }}" rel="stylesheet" type="text/css" />
     </head>
     <body >
         <nav class="navbar navbar-expand-sm  navbar-light fixed-top " style="background-color: #73DE8E;">
-            <a class="navbar-brand" href="#">iVote</a>
+            <a class="navbar-brand" href="{{ route('home-c') }}">iVote</a>
             <ul class="navbar-nav navbar-center" >
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('home-c') }}">Home</a>
@@ -51,9 +49,11 @@
           @yield('main')
         </div>
         
-        <script src="/plugins/jquery/jquery.min.js" type="text/js"></script>
-        <script src="/plugins/popper/popper.min.js" type="text/js"></script>
-        <script src="/plugins/bootstrap/js/bootstrap.min.js" type="text/js"></script>
-        <script src="{{ asset('js/app.js') }}" type="text/js"></script>
+        <script src="/plugins/jquery/jquery.min.js" type="text/javascript"></script>
+        <script src="/plugins/popper/popper.min.js" type="text/javascript"></script>
+        <script src="/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/js/app.js" type="text/javascript"></script>
+        <script src="/js/Chart.min.js" type="text/javascript"></script>
+        @stack('afterscripts')
     </body>
 </html>
