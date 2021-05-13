@@ -198,8 +198,6 @@ class PropostaController extends Controller
             $proposta->descricao = $request->get('descricao');
             $proposta->data_inicio_votacao_comunidade = $request->get('data-in-com');
             $proposta->data_fim_votacao_comunidade = $request->get('data-fim-com');
-            $proposta->data_inicio_votacao_decisor = $request->get('data-in-adm');
-            $proposta->data_fim_votacao_decisor = $request->get('data-fim-adm');
             $proposta->status = $request->get('status');
             $proposta->entidade_id= $request->get('entidade');
             /* ver o que fazer com esses atributos 

@@ -28,7 +28,7 @@
           labels: ['Não','Sim'],
           datasets: [{
               label: '# de votos',
-              data: [{{$nao}}, $sim],
+              data: [{{$nao}}, {{$sim}}],
               backgroundColor: [
                   'rgba(205, 13, 35, 0.2)',
                   'rgba(58, 242, 101, 0.2)',

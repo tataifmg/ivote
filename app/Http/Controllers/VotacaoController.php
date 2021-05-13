@@ -108,8 +108,7 @@ class VotacaoController extends Controller
     public function resultadoparcial($id)
     {
         try{
-            
-            $dados['proposta'] = Proposta::findOrFail($id);
+            //$dados['proposta'] = Proposta::findOrFail($id);
             
             $dados['sim'] =Votacao::join('users','votacaos.user_id','=','users.id')
                     ->where('proposta_id',$id)
