@@ -7,9 +7,14 @@
         <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/Chart.min.css') }}" rel="stylesheet" type="text/css" />
+        <style>
+          body {
+              background-color:#ECFFEB;
+          }    
+        </style>
     </head>
     <body >
-        <nav class="navbar navbar-expand-sm  navbar-light fixed-top " style="background-color: #73DE8E;">
+        <nav class="navbar navbar-expand-sm  navbar-light fixed-top " style="background-color: #24BD73;">
             <a class="navbar-brand" href="{{ route('home-c') }}">iVote</a>
             <ul class="navbar-nav navbar-center" >
               <li class="nav-item">

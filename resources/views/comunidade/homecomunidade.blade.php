@@ -7,10 +7,10 @@
                 <div class="col-sm-4">
                     <h2 class="">Propostas</h2> 
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <form class="form-inline" action="{{route('pesquisa-com')}}" method="POST">
                         @csrf 
-                        <input type="search" class="form-control" id="nome" name="nome" placeholder="Pesquisar">
+                        <input type="search" class="form-control" id="nome" name="nome" placeholder="Pesquise pelo nº da proposta">
                         <button class="btn btn-success" type="submit">Pesquisar</button>    
                     </form> 
                 </div>

@@ -53,6 +53,50 @@ class VotacaoController extends Controller
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         }
     }
+    public function aprovada(Request $request, $id)
+    {
+        //dd($request->all());
+        try{
+            $proposta = Proposta::findOrFail($id);
+            if($proposta->resultado_proposta ==null){
+                $dados['proposta'] = Proposta::findOrFail($id);
+                $dados['aprovado'] = Proposta::where('id', $id)->update(['resultado_proposta' => 'sim']);
+                $propostas = Proposta::all();
+                return view('decisor.homedecisor', compact('propostas'))->with('success','Resultado registrado !');
+            }else{
+                return redirect()->back()->with('danger','A resposta dessa proposta ja foi registrada!');
+            };
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+        
+    }
+
+    public function reprovada(Request $request, $id)
+    {
+        try{
+            $proposta = Proposta::findOrFail($id);
+            if($proposta->resultado_proposta ==null){
+                $dados['proposta'] = Proposta::findOrFail($id);
+                $dados['reprovado'] = Proposta::where('id', $id)->update(['resultado_proposta' => 'não']);;
+                $propostas = Proposta::all();
+                return view('decisor.homedecisor', compact('propostas'))->with('success','Resultado registrado !');
+            }else{
+                return redirect()->back()->with('danger','A resposta dessa proposta ja foi registrada!');
+            };
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
+        //dd($request->all());
+        /*try{
+            $dados['proposta'] = Proposta::findOrFail($id);
+            $dados['reprovado'] = Proposta::where('id', $id)->update(['resultado_proposta' => 'não']);
+            $propostas = Proposta::all();
+            return view('decisor.homedecisor', compact('propostas'))->with('success','Resultado registrado !');
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }*/
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -81,6 +125,16 @@ class VotacaoController extends Controller
             $votacao->user_id = auth()->user()->id;
             $votacao->resposta ='sim';
             $votacao->save();
+            $dados['sim'] =Votacao::join('users','votacaos.user_id','=','users.id')
+                    ->where('proposta_id',$id)
+                    ->where('users.tipo_perfil','comunidade')
+                    ->where('resposta','sim')
+                    ->count();
+            $dados['nao'] = Votacao::join('users','votacaos.user_id','=','users.id')
+                    ->where('proposta_id',$id)
+                    ->where('users.tipo_perfil','comunidade')
+                    ->where('resposta','não')
+                    ->count();
             return view('comunidade.resultadoparcial',$dados)->with('success','Voto salvo !');
         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
@@ -99,16 +153,26 @@ class VotacaoController extends Controller
             $votacao->user_id = auth()->user()->id;
             $votacao->resposta = 'não';
             $votacao->save();
+            $dados['sim'] =Votacao::join('users','votacaos.user_id','=','users.id')
+                    ->where('proposta_id',$id)
+                    ->where('users.tipo_perfil','comunidade')
+                    ->where('resposta','sim')
+                    ->count();
+            $dados['nao'] = Votacao::join('users','votacaos.user_id','=','users.id')
+                    ->where('proposta_id',$id)
+                    ->where('users.tipo_perfil','comunidade')
+                    ->where('resposta','não')
+                    ->count();
             return view('comunidade.resultadoparcial',$dados)->with('success','Voto salvo !');
         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         }
     }
 
-    public function resultadoparcial($id)
+    /*public function resultadoparcial(Request $request,$id)
     {
         try{
-            //$dados['proposta'] = Proposta::findOrFail($id);
+            $dados['proposta'] = Proposta::findOrFail($id);
             
             $dados['sim'] =Votacao::join('users','votacaos.user_id','=','users.id')
                     ->where('proposta_id',$id)
@@ -125,8 +189,9 @@ class VotacaoController extends Controller
         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         }
-       
-    }
+        
+    }*/
+    
     /**
      * Display the specified resource.
      *

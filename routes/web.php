@@ -87,14 +87,23 @@ Route::group( ['middleware' => ['auth','decisor']], function(){
 
     Route::get('/a/{id}', [VotacaoController::class, 'a'])->name('a');
 
-    Route::get('/des/{id}', [VotacaoController::class, 'simd'])->name('simd');
+    Route::get('/des/{id}', [VotacaoController::class, 'aprovada'])->name('simd');
 
-    Route::get('/den/{id}', [VotacaoController::class, 'naod'])->name('naod');
+    Route::get('/den/{id}', [VotacaoController::class, 'reprovada'])->name('naod');
 });
 
 Route::group( ['middleware' => ['auth', 'comunidade']], function(){
 
 //------------------------------------------------- COMUNIDADE ------------------------------------------------------
+    // Rota responsavel por cadastrar o voto sim  
+    Route::get('/teste/{id}', [VotacaoController::class, 'concordo'])->name('concordo');
+
+    // Rota responsavel por cadastrar o voto não 
+    Route::get('/votacao/{id}', [VotacaoController::class, 'discorda'])->name('nao');
+
+    Route::get('/votar-proposta/{id}', [VotacaoController::class, 'index'])->name('votar-p');
+
+    Route::get('/resultado-parcial/{id}',[VotacaoController::class, 'resultadoparcial'])->name('resultado-parcial');
 
     //Home da comunidade ps: precisa mostrar apenas em processo, encerradas ou finalizadas
     Route::get('/home-c', 'ComunidadeController@viewcomunidade')->name('home-c');
@@ -107,14 +116,6 @@ Route::group( ['middleware' => ['auth', 'comunidade']], function(){
 
     //Encerrada, já foi entregue os resultados da votação do decisor
     Route::get('/encerradas-c', 'ComunidadeController@encerradascom')->name('encerradas-c');
-
-    Route::get('/teste/{id}', [VotacaoController::class, 'concordo'])->name('concordo');
-
-    Route::get('/votacao/{id}', [VotacaoController::class, 'discorda'])->name('nao');
-
-    Route::get('/votar-proposta/{id}', [VotacaoController::class, 'index'])->name('votar-p');
-    
-    Route::get('/resultado-parcial/{id}','VotacaoController@resultadoparcial')->name('resultado-parcial');
 
     Route::get('/perfil-com', 'ComunidadeController@usercom')->name('perfil-c');
 

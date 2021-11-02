@@ -18,7 +18,7 @@ class AcompanhamentoController extends Controller
         try{
             $user = auth()->user()->id;
             $dados= Acompanhamento::where('user_id', 'like', $user)->get();
-            //$dados['propostas'] = Proposta::all();   
+            $dados['propostas'] = Proposta::all();   
             return view('comunidade.favoritascomunidade', compact('dados'));
         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();

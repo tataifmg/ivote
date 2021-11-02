@@ -45,7 +45,7 @@ class PropostaController extends Controller
     public function emprocesso(){
         //Manda uma lista das propostas Em Processo para o decisor 
         try{
-            $proposta = Proposta::whereBetween();
+            //$proposta = Proposta::whereBetween();
             $propostas = Proposta::where('status','like','Em processo')->get();   
             return view('decisor.emprocessodecisor', compact('propostas'));
         }catch(\Exception $e){
@@ -86,8 +86,8 @@ class PropostaController extends Controller
 //----------------------------------------- Pesquisa pelo nome da proposta -------------------------------    
     public function pesquisa(Request $request){
         try{
-            $nome = $request->get('nome');
-            $propostas = Proposta::where('nome','like',$nome)->get();
+            $id = $request->get('nome');
+            $propostas = Proposta::where('id','like',$id)->get();
             return view('decisor.pesquisa', ['propostas' => $propostas]);
 
         }catch(\Exception $e){

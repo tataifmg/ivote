@@ -40,10 +40,10 @@ class ComunidadeController extends Controller
         } 
     }
     //----------------------------------------- Pesquisa pelo nome da proposta -------------------------------    
-    public function pesquisacom(Request $request){
+    public function pesquisacom(Request $request){ 
         try{
-            $nome = $request->get('nome');
-            $propostas = Proposta::where('nome','like',$nome)->get();
+            $id = $request->get('nome');
+            $propostas = Proposta::where('id','like',$id)->get();
             return view('comunidade.pesquisacom', ['propostas' => $propostas]);
 
         }catch(\Exception $e){

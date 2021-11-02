@@ -59,6 +59,7 @@ class EntidadeController extends Controller
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         }
         return redirect('/inserir-entidade')->with('success','Entidade Salva !');
+        
     }
 
     /**

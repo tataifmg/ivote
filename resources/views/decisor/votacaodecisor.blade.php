@@ -5,19 +5,19 @@
     @csrf
     <div class="row">
       <div class="col-sm-1">
-        <h2 value="{{ $proposta->id }}" name="proposta" id="proposta">{{$proposta->id}}</h2>         
+        <h3 value="{{ $proposta->id }}" name="proposta" id="proposta">{{$proposta->id}}</h3>         
       </div> 
       <div class="col-sm-6">  
-        <h2 class="">{{$proposta->nome}}</h2>         
+        <h4 class="" name="nome" id="nome">{{$proposta->nome}}</h4>         
       </div> 
     </div>
     <br><br>
     <div class="row">
       <div class="form-group col-sm-8">
-        <h4 class="font-italic">Descrição :</h4>
+        <h4> Descrição :</h4>
       </div>
       <div class="form-group col-sm-4" >
-        <h4 class="font-italic">Resultado final da comunidade :</h4>
+        <h4 >Resultado final da comunidade :</h4>
       </div>
     </div> 
     <div class="row">
@@ -27,7 +27,25 @@
       <div class="col-sm-4">
         <canvas id="myChart" width="50"></canvas>
       </div>
-    </div>  
+    </div>
+    <br>
+    <div class="row">
+      <div class="form-group col-sm-4"></div>
+      <div class="form-group col-sm-8 mx-auto d-block">
+        <h4 class="font-italic ">Qual o resultado final da proposta ?</h4>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="form-group col-sm-5">
+      </div>
+      <div class="form-group col-sm-1">
+        <a href="{{route('simd', $proposta->id)}}" id="aprovada" value="aprovada" name="aprovada" class="btn btn-success">Aprovada</a>
+      </div>
+      <div class="form-group col-sm-1">
+        <a href="{{route('naod', $proposta->id)}}" id="nao" value="não" name="nao" class="btn btn-danger">Reprovada</a>
+        <!--<button class="btn btn-danger"  type="submit" value="não" name="nao" >Discordo</button> -->
+      </div>
+    </div> 
     <br> 
 </form>
 <div class="row">

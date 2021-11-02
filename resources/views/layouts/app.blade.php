@@ -16,14 +16,17 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
     <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            background-color:#ECFFEB;
+        }    
+    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #83F29D;">
+        <nav class="navbar navbar-expand-sm navbar-light shadow-sm " style="background-color: #24BD73;">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                   iVote 
-                </a>
+                <a class="navbar-brand" href="{{ url('/') }}"> iVote</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

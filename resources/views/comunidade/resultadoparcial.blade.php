@@ -3,18 +3,25 @@
 @section('main')    
 <form action="{{ route('nao', $proposta->id) }}"   >
     @csrf
-    <div class="row">
-      <div class="col-sm-4"></div> 
-      <div class="col-sm-8"> 
+    <div class="row"> 
+      <div class="col-sm-6"> 
         <h2 class="mx-auto d-block font-italic">Resultado parcial da comunidade :</h2>         
       </div> 
     </div>
     <br><br>
     <div class="row">
-      <div class="form-group col-sm-8 mx-auto d-block "  >
-        <canvas id="myChart" width="50"></canvas>
+      <div class="form-group col-sm-7">
+        <textarea class="form-control"  rows="9" name="descricao" value="{{old('descricao')}}" readonly>{{$proposta->descricao}}</textarea>
       </div>
-    </div>  
+      <div class="col-sm-4">
+        <canvas id="myChart" width="50"></canvas>
+      </div>  
+    </div>
+    <hr/>
+    <div id="actions" class="row">
+      <div class="col-md-12">
+        <a href="{{ route('home-c') }}" class="btn btn-primary">Voltar</a>
+    </div>   
     
 </form>
 @endsection
