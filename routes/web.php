@@ -117,6 +117,8 @@ Route::group( ['middleware' => ['auth', 'comunidade']], function(){
     //Encerrada, já foi entregue os resultados da votação do decisor
     Route::get('/encerradas-c', 'ComunidadeController@encerradascom')->name('encerradas-c');
 
+    Route::get('/resultadofinal-c/{id}', 'ComunidadeController@reslutadofinal')->name('resultadofinal-c');
+
     Route::get('/perfil-com', 'ComunidadeController@usercom')->name('perfil-c');
 
     Route::get('/favoritar/{id}', [AcompanhamentoController::class, 'store'])->name('favoritar');

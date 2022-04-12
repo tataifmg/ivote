@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cidade;
 use App\Proposta;
 use App\User;
+use App\Votacao;
 use Illuminate\Http\Request;
 
 class ComunidadeController extends Controller
@@ -38,6 +39,28 @@ class ComunidadeController extends Controller
         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         } 
+    }
+
+    public function reslutadofinal(Request $request, $id){
+        //Manda uma lista das propostas em Encerradas para a comunidade 
+        try{
+            $dados['proposta'] = Proposta::findOrFail($id);
+            //Tenho que pegar as resposta==sim da comunidade que tenha o id prosposta
+            // igual a prosposta selecionada 
+            $dados['sim'] =Votacao::join('users','votacaos.user_id','=','users.id')
+                    ->where('proposta_id',$id)
+                    ->where('users.tipo_perfil','comunidade')
+                    ->where('resposta','sim')
+                    ->count();
+            $dados['nao'] =Votacao::join('users','votacaos.user_id','=','users.id')
+                    ->where('proposta_id',$id)
+                    ->where('users.tipo_perfil','comunidade')
+                    ->where('resposta','não')
+                    ->count();
+            return view('comunidade.votacaode', $dados);
+        }catch(\Exception $e){
+            return redirect()->back()->with('danger',$e->getMessage())->withInput();
+        }
     }
     //----------------------------------------- Pesquisa pelo nome da proposta -------------------------------    
     public function pesquisacom(Request $request){ 

@@ -224,6 +224,7 @@ class PropostaController extends Controller
         try{
             $proposta = Proposta::findOrFail($id);
             $proposta->delete();
+
         }catch(\Exception $e){
             return redirect()->back()->with('danger',$e->getMessage())->withInput();
         }

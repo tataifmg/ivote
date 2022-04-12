@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-sm-12">    
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-8">
                 <h2 class="">Propostas</h2> 
             </div>
             <div class="col-sm-4">
@@ -29,7 +29,7 @@
                     <td>{{$proposta->nome}}</td>
                     <td>{{$proposta->status}}</td>
                     <td class="actions ">
-                        <a class="btn btn-light " href="edit.html">Votar</a>
+                        <a class="btn btn-light " href="edit.html">Registrar resultado</a>
                         <a class="btn btn-info " href="{{ '/visualizar-proposta/'.$proposta->id}}">Visualizar</a>
                         <a href="{{ '/editar-proposta/'.$proposta->id}}" class="btn btn-warning">Editar</a>
                         <a class="btn btn-danger "  href="#" onclick="confirma_exclusao();" >Excluir</a>

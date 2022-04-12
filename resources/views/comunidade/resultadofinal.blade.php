@@ -32,7 +32,7 @@
                         <td>{{$proposta->status}}</td>
                         <td class="actions ">
                             <!-- Dar funcionalidade a esse botão   !-->
-                            <a class="btn btn-primary " href="{{ '/resultadofinal-c/'.$proposta->id}}">Resultado final</a>
+                            <a class="btn btn-primary " href="edit.html">Resultado final</a>
                         </td>                       
                     </tr>
                     @endforeach
