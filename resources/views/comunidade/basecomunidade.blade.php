@@ -21,9 +21,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('encerradas-c') }}">Encerradas</a>
               </li>
-              <li class="nav-item">
+             <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('favoritas-c') }}">Favoritas</a>
-              </li>
+              </li> -->
             </ul>
             <form class="form-inline " action="{{ route('perfil-c') }}">
                 <button class="btn btn-light" type="submit">Perfil</button>

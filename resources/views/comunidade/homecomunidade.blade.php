@@ -33,8 +33,8 @@
                         <td>{{$proposta->descricao}}</td>
                         <td>{{$proposta->status}}</td>
                         <td class="actions ">
-                            <a href="{{ '/votar-proposta/'.$proposta->id}}" class="btn btn-info">Votar</a>
-                            <a href="{{ '/favoritar/'.$proposta->id}}" class="btn text-white" style="background-color: #D92344;">Favoritar</a>
+                            <a href="{{ '/votar-proposta/'.$proposta->id}}" class="btn btn-info">Votar</a> 
+                            <!--<a href="{{ '/favoritar/'.$proposta->id}}" class="btn text-white" style="background-color: #D92344;">Favoritar</a>-->
                         </td>                       
                     </tr>
                     @endforeach

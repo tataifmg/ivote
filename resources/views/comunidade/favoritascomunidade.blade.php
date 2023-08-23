@@ -28,10 +28,10 @@
             <tbody>
                 @foreach($dados as $d)        
                 <tr>
-                    <td>{{$dados->proposta_id}}</td>
+                    <td>{{$d->proposta_id}}</td>
                     <td value="{{ $d->id }}" {{old('entidade',$proposta->entidade_id)==$e->id?'selected':''}}>
                     <td class="actions ">
-                        <a href="{{ '/votar-proposta/'.$dados->proposta_id}}" class="btn btn-info">Votar</a>
+                        <a href="{{ '/votar-p/'.$dados->proposta_id}}" class="btn btn-info">Votar</a>
                     </td>                       
                 </tr>
                 @endforeach

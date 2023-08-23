@@ -7,6 +7,7 @@ use App\Entidade;
 use App\Proposta;
 use App\User;
 use App\Votacao;
+use App\Acompanhamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -223,6 +224,7 @@ class PropostaController extends Controller
     {
         try{
             $proposta = Proposta::findOrFail($id);
+            $dados = Acompanhamento::where('proposta_id', '=', $id)->delete();
             $proposta->delete();
 
         }catch(\Exception $e){

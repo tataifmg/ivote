@@ -123,7 +123,7 @@ Route::group( ['middleware' => ['auth', 'comunidade']], function(){
 
     Route::get('/favoritar/{id}', [AcompanhamentoController::class, 'store'])->name('favoritar');
 
-    Route::get('/favoritas-c', [AcompanhamentoController::class, 'index'])->name('favoritas-c');
+    Route::get('/favoritas-c', 'AcompanhamentoController@index')->name('favoritas-c');
 });
 
 
